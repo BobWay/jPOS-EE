@@ -122,6 +122,19 @@ public class GLSession {
     public GLSession (DB db) throws HibernateException, GLException {
         this (db, System.getProperty ("user.name"));
     }
+
+    /**
+     * Save a hibernate object to the database. This method is a temporary hack.
+     *
+     * @param obj the hibernate object to save.
+     * @throws HibernateException on database errors.
+     */
+    public void save (Object obj) 
+        throws HibernateException
+    {
+        session.save (obj);
+    }
+
     /**
      * @param action name
      * @return true if user has permission to perform given action
