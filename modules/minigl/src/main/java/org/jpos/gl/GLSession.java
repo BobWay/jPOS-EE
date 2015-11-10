@@ -129,10 +129,27 @@ public class GLSession {
      * @param obj the hibernate object to save.
      * @throws HibernateException on database errors.
      */
-    public void save (Object obj) 
+    public void saveObject (Object obj) 
         throws HibernateException
     {
         session.save (obj);
+    }
+
+    /**
+     * @param c class of object to return
+     * @param id transfer id
+     * @return object or null
+     */
+    public Object getObject (Class<?> c, long id)
+    {
+        Object o = null;
+        try {
+            o = session.load (c, new Long(id));
+        } catch (ObjectNotFoundException e) {
+            // okay to happen
+            return null;
+        }
+        return o;
     }
 
     /**
